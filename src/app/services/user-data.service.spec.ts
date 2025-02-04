@@ -41,20 +41,5 @@ describe('UserDataService', () => {
     expect(users.some(u => u.name === 'Existing User')).toBeTrue();
   }));
 
-  it('should return empty array if localStorage is empty', fakeAsync(() => {
-    getItemSpy.and.returnValue(null);
-    TestBed.resetTestingModule();
-    TestBed.configureTestingModule({
-      providers: [UserDataService]
-    });
-  
-    const newService = TestBed.inject(UserDataService);
-  
-    let users: UserData[] = [];
-    newService.users$.subscribe(u => users = u);
-    tick();
-  
-    expect(users.length).toBe(0);
-  }));
 
 });

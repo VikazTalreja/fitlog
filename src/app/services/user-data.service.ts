@@ -11,8 +11,6 @@ export interface UserData {
   providedIn: 'root',
 })
 export class UserDataService {
-  private userData: UserData[] = [];
-
   private sampleData: UserData[] = [
     {
       id: 1,
@@ -105,35 +103,27 @@ export class UserDataService {
     },
   ];
 
-  private currentDataSource: 'real' | 'sample' = 'sample';
   private userSubject = new BehaviorSubject<UserData[]>(this.getUsersFromLocalStorage());
   public users$ = this.userSubject.asObservable();
 
   constructor() {
-    const storedUsers = this.getUsersFromLocalStorage();
-    this.userData = storedUsers;
+    this.loadSampleData(); // Load sample data on initialization
   }
 
   private getUsersFromLocalStorage(): UserData[] {
     const users = localStorage.getItem('users');
-    return users ? JSON.parse(users) : [];
+    return users ? JSON.parse(users) : this.sampleData; // Return localStorage data or fallback to sample data
   }
 
-  private saveUsersToLocalStorage(): void {
-    localStorage.setItem('users', JSON.stringify(this.userData));
+  private saveUsersToLocalStorage(users: UserData[]): void {
+    localStorage.setItem('users', JSON.stringify(users));
+    this.userSubject.next(users); // Update BehaviorSubject with the new data
   }
 
   deleteUser(userId: number): void {
-    let updatedUsers;
-    if (this.currentDataSource === 'real') {
-      updatedUsers = this.userData.filter(user => user.id !== userId);
-      this.userData = updatedUsers;
-    } else {
-      updatedUsers = this.sampleData.filter(user => user.id !== userId);
-      this.sampleData = updatedUsers;
-    }
-    this.userSubject.next(this.currentDataSource === 'real' ? this.userData : this.sampleData);
-    this.saveUsersToLocalStorage();
+    const updatedUsers = this.sampleData.filter(user => user.id !== userId);
+    this.sampleData = updatedUsers;
+    this.saveUsersToLocalStorage(this.sampleData); // Save the updated list to localStorage
   }
 
   addUser(userName: string, workout: { type: string; minutes: number }) {
@@ -142,15 +132,8 @@ export class UserDataService {
       name: userName,
       workouts: [workout],
     };
-
-    if (this.currentDataSource === 'real') {
-      this.userData.push(newUser);
-    } else {
-      this.sampleData.push(newUser);
-    }
-
-    this.userSubject.next(this.currentDataSource === 'real' ? this.userData : this.sampleData);
-    this.saveUsersToLocalStorage(); 
+    this.sampleData.push(newUser);
+    this.saveUsersToLocalStorage(this.sampleData); // Save updated list to localStorage
   }
 
   addOrUpdateUser(userName: string, workout: { type: string; minutes: number }) {
@@ -171,26 +154,27 @@ export class UserDataService {
         name: userName,
         workouts: [workout],
       };
-      if (this.currentDataSource === 'real') {
-        this.userData.push(newUser);
-      } else {
-        this.sampleData.push(newUser);
-      }
+      this.sampleData.push(newUser);
     }
 
-    this.userSubject.next(this.currentDataSource === 'real' ? this.userData : this.sampleData);
-    this.saveUsersToLocalStorage(); 
+    this.saveUsersToLocalStorage(this.sampleData); // Save updated list to localStorage
   }
 
   private generateUniqueId(): number {
-    return this.currentDataSource === 'real'
-      ? this.userData.length + 1
-      : this.sampleData.length + 1;
+    return this.sampleData.length > 0
+      ? Math.max(...this.sampleData.map(user => user.id)) + 1
+      : 1;
   }
 
   private getExistingUser(userName: string): UserData | undefined {
-    return this.currentDataSource === 'real'
-      ? this.userData.find((user) => user.name === userName)
-      : this.sampleData.find((user) => user.name === userName);
+    return this.sampleData.find((user) => user.name === userName);
+  }
+
+  private loadSampleData() {
+    // If no data is found in localStorage, use the sample data
+    const users = this.getUsersFromLocalStorage();
+    if (!users || users.length === 0) {
+      this.saveUsersToLocalStorage(this.sampleData); // Initialize localStorage with sample data if it's empty
+    }
   }
 }
