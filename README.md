@@ -1,5 +1,5 @@
 <div align="center">
-  <h1> <img height="150" width="250" alt="Fit-Trak_Loga" src="/src/assets/img/logo.jpg"> </h1>
+  <h1> <img height="250" width="250" alt="Fit-Trak_Loga" src="/src/assets/img/logo.jpg"> </h1>
   <strong>Fitlog</strong>
   Built for Fyle Internship ( Front-End Challenge).
 </div>
