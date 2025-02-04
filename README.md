@@ -1,29 +1,30 @@
 <div align="center">
-  <h1> <img height="150" width="250" alt="Fit-Trak_Loga" src="https://i.ibb.co/FBVKg0f/fitlog-logo.png"> </h1>
+  <h1> <img height="150" width="250" alt="Fit-Trak_Loga" src="/src/assets/img/logo.jpg"> </h1>
+  <strong>Fitlog</strong>
   Built for Fyle Internship ( Front-End Challenge).
 </div>
 
-## ✨ Features
+## Features
 
 - **Workout Management**: Easily add and track your workouts through an intuitive form interface
 - **Visual Analytics**: View your workout progress through graphs
 - **Smart Search**: Filter and search workouts by username
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend Framework**: [Angular](https://angular.io/) (Latest Version)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) for modern, utility-first styling
 - **UI Components**: [PrimeNG](https://primeng.org/) with PrimeIcons for rich UI components
 - **Charts**: Charts.js for workout visualization
 
-## 📋 Prerequisites
+## Prerequisites
 
 Before you begin, ensure you have the following installed:
 - Node.js (v18.x)
 - npm (v9.x or higher)
 - Angular CLI (`npm install -g @angular/cli`)
 
-## 🚀 Installation
+## Installation
 
 1. Clone the repository:
 ```bash
@@ -36,7 +37,7 @@ cd fitlog
 npm install
 ```
 
-## 🏃‍♂️ Running the Application
+## Running the Application
 
 1. Start the development server:
 ```bash
@@ -48,7 +49,7 @@ ng serve
 http://localhost:4200
 ```
 
-## 🎯 Usage
+## Usage
 
 1. **Adding a Workout**:
    - Click the "Add Workout" button
@@ -64,7 +65,7 @@ http://localhost:4200
    - Results update in real-time
 
 
-## 🧪 Test Coverage
+## Test Coverage
 
-Here's our latest test coverage results showing our commitment to code quality:
+[image](/src/assets/img/image.png) 
 
