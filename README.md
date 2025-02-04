@@ -1,14 +1,13 @@
 <div align="center">
   <h1> <img height="150" width="250" alt="Fit-Trak_Loga" src="https://i.ibb.co/FBVKg0f/fitlog-logo.png"> </h1>
-  Built for Fyle Internship Assignment.
+  Built for Fyle Internship ( Front-End Challenge).
 </div>
 
 ## ✨ Features
 
 - **Workout Management**: Easily add and track your workouts through an intuitive form interface
 - **Visual Analytics**: View your workout progress through graphs
-- **Smart Search**: Filter and search workouts by username and workout type
-- **Demo Mode**: Toggle between real and sample data for demonstration purposes
+- **Smart Search**: Filter and search workouts by username
 
 ## 🛠️ Tech Stack
 
@@ -28,7 +27,7 @@ Before you begin, ensure you have the following installed:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/RishabhSinha02/fitlog.git
+git clone https://github.com/VikazTalreja/fitlog.git
 cd fitlog
 ```
 
@@ -62,26 +61,10 @@ http://localhost:4200
 
 3. **Search and Filter**:
    - Use the search bar to filter by username
-   - Use the dropdown to filter by workout type
    - Results update in real-time
 
-4. **Sample Data**:
-   - Toggle the switch at the top to view sample data
-   - Switch back to view your real workout data
 
 ## 🧪 Test Coverage
 
 Here's our latest test coverage results showing our commitment to code quality:
-
-### Overall Test Coverage
-![image](https://github.com/user-attachments/assets/9ed90e45-b1e2-4a98-b477-2175fd3063f7)
-
-### Component-Level Coverage
-
-#### Filter Component Tests
-![image](https://github.com/user-attachments/assets/971f5ac7-e29b-4515-b7ae-22914e82c86d)
-
-#### UserDataService Tests
-![image](https://github.com/user-attachments/assets/562f5f11-73d5-4419-9137-e360eb713928)
-
 

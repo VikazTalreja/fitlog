@@ -193,14 +193,4 @@ export class UserDataService {
       ? this.userData.find((user) => user.name === userName)
       : this.sampleData.find((user) => user.name === userName);
   }
-
-  switchToSampleData(): void {
-    this.currentDataSource = 'sample';
-    this.userSubject.next(this.sampleData);
-  }
-
-  switchToRealData(): void {
-    this.currentDataSource = 'real';
-    this.userSubject.next(this.userData);
-  }
 }

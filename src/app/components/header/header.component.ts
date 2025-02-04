@@ -7,13 +7,7 @@ import { UserDataService } from '../../services/user-data.service';
   styleUrls: ['./header.component.css'], 
   standalone: true,
 })
-export class HeaderComponent implements OnInit {
-  greeting: string = '';
-
-  constructor(private userDataService: UserDataService) {}
-
-  ngOnInit(): void {
-    this.userDataService.switchToSampleData();
-  }
+export class HeaderComponent {
+ 
 
 }
