@@ -1,0 +1,29 @@
+<div *ngIf="sidebarSelected === 'All'">
+<app-header></app-header>
+    <app-table></app-table>
+
+</div>
+<div *ngIf="sidebarSelected !== 'AlL'">
+    <div *ngFor="let user of users">
+       
+        <div *ngIf="user.name === sidebarSelected">
+            <div class="p-4 w-full">
+                <div class="grid grid-cols-12 gap-4">
+
+                    <div *ngFor="let workout of user.workouts" class="col-span-12 sm:col-span-6 md:col-span-3">
+                        <div class="flex flex-row bg-blue-500 border shadow-sm rounded-2xl p-4">
+                            <div class="flex flex-col flex-grow ml-4">
+                                <div class="text-base text-white font-black"> {{ workout.type }} :</div>
+                                <div class="text-xl text-white font-extrabold">{{ workout.minutes }} min</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <app-user-chart [user]="user"></app-user-chart>
+        </div>
+    </div>
+
+</div>

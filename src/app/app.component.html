@@ -1,0 +1,19 @@
+<div class=" flex flex-row w-full space-x-10">
+  <div class="sidebar w-[30%] hidden sm:block">
+    <app-sidebar (sidebarChangeEvent)="onSidebarChange($event)"></app-sidebar>
+  </div>
+
+  <div class="content w-full  hidden sm:block">
+    <app-main [sidebarSelected]="sidebarSelected"></app-main>
+  </div>
+
+
+  <div class="sm:hidden col-span-4 text-center text-gray-600 bg-gray-100 p-8 rounded-lg shadow-md border border-gray-300">
+    <p class="text-lg font-semibold text-gray-800">
+      <span class="block mb-4">
+      Use Laptop for best experince.
+      </span>
+      <span class="text-sm text-gray-500">Please view on a larger screen for full access.</span>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<app-filters
+  (nameFilterChange)="onNameFilterChange($event)"
+  ></app-filters>
+
+<ng-container *ngIf="filteredUsers$ | async as filteredUsers">
+  <div *ngIf="filteredUsers.length === 0" class="no-data text-center p-4  rounded-lg shadow-md">
+    <p class="text-lg font-semibold ">No data available.</p>
+  </div>
+
+  <p-table *ngIf="filteredUsers.length > 0"
+    [value]="(filteredUsers$ | async) || []"
+    [paginator]="true"
+    [rows]="5"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [(first)]="first"
+    (onPage)="onPage($event)"
+    class="shadow-lg rounded-lg overflow-hidden "
+  >
+    <ng-template #header>
+      <tr class=" text-left ">
+        <th class="px-4 py-2 text-sm font-medium" >Name</th>
+        <th class="px-4 py-2 text-sm font-medium">Workouts</th>
+        <th class="px-4 py-2 text-sm font-medium">No. of Workouts</th>
+        <th class="px-4 py-2 text-sm font-medium">Total Workout Minutes</th>
+        <th class="px-4 py-2 text-sm font-medium">Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-user>
+      <tr class=" space-y-4" >
+        <td class="px-4 py-2 text-sm  " style="border-width: 0px;">{{ user.name }}</td>
+        <td class="px-4 py-2 text-sm " style="border-width: 0px;">{{ getWorkoutDetails(user.workouts) }}</td>
+        <td class="px-4 py-2 text-sm " style="border-width: 0px;">{{ user.workouts.length }}</td>
+        <td class="px-4 py-2 text-sm " style="border-width: 0px;">{{ getTotalWorkoutMinutes(user.workouts) }}</td>
+        <td class="px-4 py-2 text-sm  flex justify-start items-center gap-2" style="border-width: 0px;">
+          <button
+            (click)="deleteUser(user.id)"
+            class="bg-red-500 text-white mb-3 py-1 px-2 rounded-lg text-xs hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 dark:bg-red-600 dark:hover:bg-red-700"
+            >
+           Remove
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+    <!-- <ng-template pTemplate="paginatorTemplate" let-user>
+      <div class="flex justify-between items-center bg-blue-100 px-4 py-2 rounded-b-lg">
+        <button 
+          pButton 
+          class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-blue-600 transition disabled:opacity-50"
+          (click)="state.first = state.first - state.rows"
+          [disabled]="state.first === 0"
+        >
+          Previous
+        </button>
+  
+       
+        <span class="text-blue-700 font-semibold text-sm">
+          Page {{ state.page + 1 }} of {{ state.pageCount }}
+        </span>
+  
+        <button 
+          pButton 
+          class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-blue-600 transition disabled:opacity-50"
+          (click)="state.first = state.first + state.rows"
+          [disabled]="state.first + state.rows >= state.totalRecords"
+        >
+          Next
+        </button>
+      </div>
+    </ng-template> -->
+  </p-table>
+</ng-container>

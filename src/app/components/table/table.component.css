@@ -1,0 +1,3 @@
+.table-header ::ng-deep {
+    border: 0;
+}

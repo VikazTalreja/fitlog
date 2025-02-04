@@ -1,0 +1,62 @@
+<div class="flex flex-col h-full bg-[#FFF6E9] bg-opacity-50 p-4 text-white">
+   <div class="flex flex-row items-center rounded-3xl p-4">
+        <img src="assets/img/icon.png" class="rounded-lg h-24" alt="Logo">
+        <div class="flex flex-col ml-1">
+            <span class="text-2xl font-bold text-black">FitLog</span>
+            <span class="text-sm font-semibold text-black flex-nowrap">Track Your Workouts!</span>
+        </div>
+    </div>
+
+    <!-- Second Card: Sidebar Menu -->
+    <div class="mt-6 flex flex-col p-4 rounded-3xl shadow-lg h-full overflow-y-auto">
+        <div class="text-black font-black mb-4">Overview</div>
+        
+        <div *ngIf="sidebarSelected === 'All'; else notAll">
+            <button class="bg-[#40A2E3] text-white p-3  font-bold flex items-center gap-2 rounded-xl w-full">
+                <div>Table</div>
+            </button>
+        </div>
+        
+        <div class="text-black font-black mt-4">Users</div>
+
+        <ng-template #notAll>
+            <button (click)="sidebarChange('All')" class="bg-[#fbf5eb] text-black shadow-lg p-3 flex items-center gap-2 font-bold rounded-xl w-full">
+                <div>Table</div>
+            </button>
+        </ng-template>
+
+        <div class="menu-item gap-4 my-2">
+            <div class="my-1" *ngFor="let user of users">
+                <div *ngIf="sidebarSelected === user.name; else notAll">
+                    <button (click)="sidebarChange(user.name)" class="bg-[#40A2E3] text-white p-3 font-bold flex items-center gap-2 rounded-xl w-full">
+                        <div class="flex flex-row w-full">
+                            <div class="rounded-full mx-2 text-white text-xs flex justify-center items-center bg-blue-500 w-7 h-7">
+                              {{ getInitials(user.name) }}
+                            </div>
+                            <div>
+                              {{ user.name }}
+                            </div>
+                          </div>
+                    </button>
+                </div>
+                <ng-template #notAll>
+                    <button (click)="sidebarChange(user.name)" [ngClass]="{'bg-[#fbf5eb] shadow-lg  text-black': sidebarSelected !== user.name, 'bg-[#32CD32] text-white': sidebarSelected === user.name}" class="p-3 flex items-center gap-2 font-bold rounded-xl w-full">
+                        <div class="mt-1">
+                            <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                                <path d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
+                            </svg> -->
+                        </div>
+                        <div class="flex flex-row w-full">
+                            <div class="rounded-full mx-2 text-white text-xs flex justify-center items-center bg-blue-500 w-7 h-7">
+                              {{ getInitials(user.name) }}
+                            </div>
+                            <div>
+                              {{ user.name }}
+                            </div>
+                          </div>
+                    </button>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
